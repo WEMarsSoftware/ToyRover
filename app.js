@@ -33,5 +33,5 @@ app.listen(port, () => {
 	
 	console.log("\n");
 	console.log("Rover running on:");
-	console.log("http://localhost:3000");
+	console.log("http://localhost:" + port);
 });
