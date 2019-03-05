@@ -1,16 +1,31 @@
 
-var data = require('./data.json');
+var data1 = require('./data1.json');
+var data2 = require('./data2.json');
 var express = require("express");
 var colors = require('colors');
 
+// ADD IN node-json-db
+// https://www.npmjs.com/package/node-json-db
+
 // Create new express app
 var app = express();
-let port = 3000;
+var bodyParser = require('body-parser');
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+let port = process.env.PORT || 8080;
+
+let toggler = 0;
 // Handle get requests
 app.get("/", (req, res, next) => {
- res.json(data);
+ if(toggler == 0){
+ 	res.json(data1);
+ 	toggler=1;
+ } else {
+ 	res.json(data2);
+ 	toggler=0;
+ }
 });
 
 app.listen(port, () => {
@@ -35,3 +50,4 @@ app.listen(port, () => {
 	console.log("Rover running on:");
 	console.log("http://localhost:" + port);
 });
+
